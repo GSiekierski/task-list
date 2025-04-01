@@ -7,6 +7,36 @@
 </head>
 <body class="container">
     <h1>task list</h1>
-    <script src="index.js"></script>
+    <div id="userdiv">
+        <h2>add user:</h2>
+        <input id="userinput" type="text" placeholder="user name">
+        <button id="userbtn">add user</button>
+    </div>
+
+    <div id="taskdiv">
+        <h2>add task:</h2>
+        <input id="taskinput" type="text" placeholder="task name">
+        <button id="taskbtn">add task</button>
+    </div>
+
+    <div id="filterdiv">
+        <label>filter:</label>
+        <select id="filter">
+            <option value="all">all</option>
+            <option value="pending">pending</option>
+            <option value="done">done</option>
+        </select>
+    </div>
+
+    <div id="tasklistdiv">
+        <label>task list:</label>
+        <ul id="tasklist">
+
+        </ul>
+    </div>
+
+    <div id="userlistdiv">
+
+    </div>
 </body>
 </html>
