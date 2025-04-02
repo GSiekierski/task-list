@@ -10,4 +10,12 @@ export default class user{
         this.users.push(newUser);
         return newUser;
     }
+
+    deleteUser(id){
+        this.users=this.users.filter(user => user.id !==id);
+    }
+
+    getUsers(){
+        return this.users;
+    }
 }

@@ -6,21 +6,21 @@
     <title>Lista Zadań</title>
 </head>
 <body class="container">
-    <h1>task list</h1>
+    <h1>Task List</h1>
     <div id="userdiv">
-        <h2>add user:</h2>
-        <input id="userinput" type="text" placeholder="user name">
-        <button id="userbtn">add user</button>
+
+        <input id="userinput" type="text" placeholder="User name">
+        <button id="userbtn">Add user</button>
     </div>
 
     <div id="taskdiv">
-        <h2>add task:</h2>
-        <input id="taskinput" type="text" placeholder="task name">
-        <button id="taskbtn">add task</button>
+
+        <input id="taskinput" type="text" placeholder="Task name">
+        <button id="taskbtn">Add task</button>
     </div>
 
     <div id="filterdiv">
-        <label>filter:</label>
+        <span>Filter:</span>
         <select id="filter">
             <option value="all">all</option>
             <option value="pending">pending</option>
@@ -29,14 +29,13 @@
     </div>
 
     <div id="tasklistdiv">
-        <label>task list:</label>
-        <ul id="tasklist">
-
-        </ul>
+        <span>Task list, drag users to assign:</span>
+        <ul id="tasklist"></ul>
     </div>
 
     <div id="userlistdiv">
-
+        <span>User list:</span>
+        <ul id="userlist"></ul>
     </div>
 </body>
 </html>
