@@ -1,7 +1,7 @@
 import task from "./tasks.js";
 
 export default class taskmanager extends task{
-    constructor(){ //add task
+    constructor(){
         super();
         this.tasks=[];
     }

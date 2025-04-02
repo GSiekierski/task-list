@@ -5,6 +5,7 @@ export default class task{
         this.task_text=task_text;
         this.task_status=task_status;
         this.task_date=this.getDate();
+        this.assignedUsers=[];
     }
 
     getDate(){
