@@ -1,12 +1,12 @@
 export default class user{
-    constructor(name){
-        this.id = Date.now()+55206;
+    constructor(name, id = null){
+        this.id = id !== null ? id : Date.now()+55206;
         this.name=name;
         this.users=[];
     }
 
-    addUser(name){
-        const newUser=new user(name);
+    addUser(name, id=null){
+        const newUser=new user(name, id);
         this.users.push(newUser);
         return newUser;
     }
