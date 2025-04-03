@@ -6,10 +6,25 @@ export default class taskmanager extends task{
         this.tasks=[];
     }
 
-    addTask(text){
-        const newTask=new task(text);
+    addTask(task_text, task_status = "pending", task_date = null, id = null, assignedUsers = []){
+        const newTask=new task(task_text, task_status, task_date, id, assignedUsers);
         this.tasks.push(newTask);
         return newTask;
+    }
+
+
+    assignUserToTask(taskId, userName) {
+        const task = this.tasks.find(task => task.id === taskId);
+        if (task && isNaN(userName) && !task.assignedUsers.includes(userName)) {
+            task.assignUser.push(userName);
+        }
+    }
+
+    removeUserFromTask(taskId, userName) {
+        const task = this.tasks.find(task => task.id === taskId);
+        if (task) {
+            task.assignedUsers = task.assignedUsers.filter(user => user !== userName);
+        }
     }
 
     deleteTask(id){

@@ -19,10 +19,10 @@ const storedTasks = JSON.parse(localStorage.getItem("tasks"));
 const storedUsers = JSON.parse(localStorage.getItem("users"));
 
 if (storedTasks) {
-    storedTasks.forEach(task => taskManager.addTask(task.task_text, task.task_status, task.task_date, task.assignedUsers));
+    storedTasks.forEach(task => taskManager.addTask(task.task_text, task.task_status, task.task_date, task.id, task.assignedUsers));
 }
 if (storedUsers) {
-    storedUsers.forEach(user => users.addUser(user.name));
+    storedUsers.forEach(user => users.addUser(user.name, user.id));
 }
 
 renderTasks();
@@ -70,8 +70,8 @@ function renderTasks(filter = "all"){
     tasks.forEach(element => {
         const li = document.createElement("li");
         li.innerHTML = `
-        <div style="border: 1px solid black">${element.task_text} - ${element.task_status} - <i>${element.task_date}</i>
-        <br>task id: ${element.id}<br>
+        <div>${element.task_text} - ${element.task_status} - <i>${element.task_date}</i>
+        <br>
         <select id="statusselect${element.id}"><option value="pending">pending</option><option value="done">done</option></select>
         <button onclick="updatestat(${element.id})">status update</button>
         <button onclick="edit(${element.id})">edit</button>
@@ -91,7 +91,7 @@ function renderTasks(filter = "all"){
             event.preventDefault();
             const userName = event.dataTransfer.getData("text");
       
-            if (!element.assignedUsers.includes(userName)) {
+            if (userName && isNaN(userName) && !element.assignedUsers.includes(userName)) {
               element.assignedUsers.push(userName);
               saveToLocalStorage();
               renderTasks();
@@ -100,6 +100,7 @@ function renderTasks(filter = "all"){
         });
 
         const assignedUsersList = li.querySelector(".assigned");
+        assignedUsersList.innerHTML = "";
         element.assignedUsers.forEach(userName => {
           const userLi = document.createElement("li");
           userLi.textContent = userName;
@@ -108,7 +109,7 @@ function renderTasks(filter = "all"){
 
           userLi.addEventListener("dragstart", (event) => {
             event.dataTransfer.setData("removeUser", userName);
-            event.dataTransfer.setData("taskName", element.task_text);
+            event.dataTransfer.setData("taskId", element.id);
           });
     
           assignedUsersList.appendChild(userLi);
@@ -168,14 +169,13 @@ function renderTasks(filter = "all"){
       });
 
     document.body.addEventListener("drop", (event) => {
+        event.preventDefault();
         const userName = event.dataTransfer.getData("removeUser");
-        const taskName = event.dataTransfer.getData("taskName");
-        if (userName && taskName) {
-        const task = taskManager.getTasks().find(task => task.task_text === taskName);
-          if (task) {
-            task.assignedUsers = task.assignedUsers.filter(user => user !== userName);
+        const taskId = event.dataTransfer.getData("taskId");
+        if (userName && taskId) {
+            taskManager.removeUserFromTask(parseInt(taskId), userName);
             saveToLocalStorage();
             renderTasks();
-          }
+        
         }
       });

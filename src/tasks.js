@@ -1,11 +1,11 @@
 export default class task{
 
-    constructor(task_text, task_status="pending"){
-        this.id=Date.now();
+    constructor(task_text, task_status="pending", task_date = null, id = null, assignedUsers = []){
+        this.id= id !== null ? id : Date.now();
         this.task_text=task_text;
         this.task_status=task_status;
-        this.task_date=this.getDate();
-        this.assignedUsers=[];
+        this.task_date= task_date || this.getDate();
+        this.assignedUsers = assignedUsers;
     }
 
     getDate(){
@@ -18,7 +18,17 @@ export default class task{
 
     if(status_types.includes(new_status)){
         this.task_status= new_status;
+        }
     }
+
+    assignUser(userName) {
+        if (!this.assignedUsers.includes(userName)) {
+            this.assignedUsers.push(userName);
+        }
+    }
+
+    removeUser(userName) {
+        this.assignedUsers = this.assignedUsers.filter(user => user !== userName);
     }
 
     set_Text(text){
