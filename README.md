@@ -23,3 +23,5 @@ npm run build
 
 -aby wystartować aplikacje należy użyć komendy:
 npm start
+
+-aby wyłączyć aplikacje należy użyć skrótu klawiszowego ctrl+c
