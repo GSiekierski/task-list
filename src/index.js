@@ -72,12 +72,12 @@ function renderTasks(filter = "all"){
         li.innerHTML = `
         <div>${element.task_text} - ${element.task_status} - <i>${element.task_date}</i>
         <br>
-        <select id="statusselect${element.id}"><option value="pending">pending</option><option value="done">done</option></select>
-        <button onclick="updatestat(${element.id})">status update</button>
-        <button onclick="edit(${element.id})">edit</button>
-        <button onclick="remove(${element.id})">delete</button>
+        <select id="statusselect${element.id}"><option value="pending">W trakcie</option><option value="done">Wykonane</option></select>
+        <button onclick="updatestat(${element.id})">zaaktualizuj status</button>
+        <button onclick="edit(${element.id})">edytuj</button>
+        <button onclick="remove(${element.id})">usuń</button>
         </div>
-        <span>Assigned:</span>
+        <span>Przypisany użytkownik:</span>
         <ul class="assigned"></ul>
         `;
 
@@ -131,7 +131,7 @@ function renderTasks(filter = "all"){
             });
             
             const deleteBtn = document.createElement("button");
-            deleteBtn.textContent = "delete";
+            deleteBtn.textContent = "usuń";
             deleteBtn.addEventListener("click", ()=>{
                 users.deleteUser(element.id);
                 saveToLocalStorage();
